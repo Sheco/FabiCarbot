@@ -1,0 +1,16 @@
+{
+  "name": "cuentorete",
+  "version": "0.1.0",
+  "description": "Bot de Telegram para contar un cuento",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "8.2.0",
+    "telegraf": "3.36.0",
+    "telegraf-inline-menu": "4.0.0"
+  }
+}
