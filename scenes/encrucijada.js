@@ -3,6 +3,7 @@ const { basicReply, conditionalList } = require('../helper')
 
 module.exports = new Scene('encrucijada')
   .enter(async (ctx) => {
+    console.log('Encrucijada:', ctx.update.message.from.first_name)
     await basicReply(ctx, 0, 3000,
       'Estoy adentro, en una habitación en forma de V, estoy en el centro, en la esquina',
       [

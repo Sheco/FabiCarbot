@@ -4,6 +4,7 @@ const { basicReply } = require('../helper')
 module.exports = new Scene('inicio')
   .enter(async (ctx) => {
     const name = ctx.update.message.from.first_name
+    console.log('Inicio:', ctx.update.message.from.first_name)
 
     await basicReply(ctx, 500, 1000,
       `Hola ${name}! que suerte que me hablas!!!`)

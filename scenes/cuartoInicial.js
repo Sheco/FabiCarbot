@@ -3,6 +3,7 @@ const { basicReply } = require('../helper')
 
 module.exports = new Scene('cuartoInicial')
   .enter(async (ctx) => {
+    console.log('Cuarto inicial:', ctx.update.message.from.first_name)
     await basicReply(ctx, 0, 5000,
       'Estoy en un cuarto pequeño con dos puertas: una roja y la otra azul',
       [
