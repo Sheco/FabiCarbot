@@ -37,11 +37,15 @@ bot.command('enter', (ctx) => {
   }
 })
 bot.hears('inventario', async (ctx) => {
+  if(!ctx.session.inventory) {
+    return
+  }
+
   if (ctx.session.inventory.llave_roja) {
-    await basicReply('Tengo una llave roja')
+    await basicReply(ctx, 0, 0, 'Tengo una llave roja')
   }
   if (ctx.session.inventory.polvo) {
-    await basicReply('Tengo una botella de polvo')
+    await basicReply(ctx, 0, 0, 'Tengo una botella de polvo')
   }
 })
 
