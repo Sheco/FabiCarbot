@@ -33,7 +33,7 @@ bot.command('enter', (ctx) => {
   }
   try {
     ctx.scene.enter(args[1])
-  } catch {
+  } catch (e) {
   }
 })
 bot.hears('inventario', async (ctx) => {
