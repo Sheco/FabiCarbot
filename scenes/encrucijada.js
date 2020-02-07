@@ -28,13 +28,21 @@ module.exports = new Scene('encrucijada')
       await basicReply(ctx, 0, 2000,
         'El letrero dice "CUIDADO"')
     }
+    await basicReply(ctx, 0, 2000,
+      'En el centro esta la puerta roja de donde vine')
+
     await basicReply(ctx, 0, 500,
       '¿Que hago ahora?',
       conditionalList([
         ['Agarra la botella de polvo', !ctx.session.inventory.botellaPolvo],
-        ['Acercate a la puerta de la izquierda', true],
+        ['Usa la puerta de la izquierda', true],
+        ['Usa la puerta roja', true],
         ['Explora el extremo de la derecha', true]
       ]))
+  })
+  .hears(/usa.*puerta.*roja/i, async (ctx) => {
+    await basicReply(ctx, 500, 1000, 'voy')
+    ctx.scene.enter('cuartoInicial')
   })
   .hears(/botella/i, async (ctx) => {
     ctx.session.inventory.botellaPolvo = true
@@ -77,7 +85,7 @@ module.exports = new Scene('encrucijada')
     await basicReply(ctx, 500, 1000, 'Hay una hoja de papel tirada, parece una lista del super',
       [
         'Lee la nota',
-        'Acercate a la puerta de la izquierda',
+        'Usa la puerta de la izquierda',
         'Describeme lo que hay a tu alrededor'
       ])
   })

@@ -18,9 +18,13 @@ module.exports = new Scene('inicio')
 
     await ctx.scene.enter('cuartoInicial')
   })
-  .hears(/si/i, async (ctx) => {
+  .hears(/(si|ok|esta bien)/i, async (ctx) => {
     await basicReply(ctx, 500, 1500,
       'Excelente! no sabes que alegría me da leer eso')
+    await basicReply(ctx, 0, 5000,
+      'Estoy en problemas y necesito tu ayuda... estaba trabajando en uno de mis inventos y accidentalmente viaje a otro universo')
+    await basicReply(ctx, 0, 5000,
+      'Aquí el gobierno tiene un aparato de control mental y no puede pensar claramente, tienes que decirme que hacer para poder escapar.')
     await ctx.scene.enter('cuartoInicial')
   })
   .hears(/quien eres?/i, async (ctx) => {

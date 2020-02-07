@@ -4,42 +4,37 @@ const { basicReply } = require('../helper')
 module.exports = new Scene('cuartoInicial')
   .enter(async (ctx) => {
     await basicReply(ctx, 0, 5000,
-      'Estoy en problemas y necesito tu ayuda... estaba trabajando en uno de mis inventos y accidentalmente viaje a otro universo')
-    await basicReply(ctx, 0, 5000,
-      'Aquí el gobierno tiene un aparato de control mental y nadie puede pensar claramente, por lo tanto tu me tienes que decir que hacer para poder escapar.')
-    await basicReply(ctx, 0, 5000,
-      'Estoy en un cuarto cerrado, veo una cama, un closet y dos puertas: una es roja y la otra es azul',
+      'Estoy en un cuarto pequeño con dos puertas: una roja y la otra azul',
       [
-        'Abre la puerta roja',
-        'Abre la puerta azul',
-        '¿Que hay dentro del closet?',
-        'Describeme lo que ves a tu al rededor'
+        'Usa la puerta roja',
+        'Usa la puerta azul',
+        'Describeme lo que ves a tu alrededor'
       ])
   })
-  .hears('Describeme lo que ves a tu al rededor', async (ctx) => {
+  .hears(/describe.*alrededor/i, async (ctx) => {
     await basicReply(ctx, 500, 2000,
       'Estoy en un cuarto pequeño, las ventanas estan cerradas con madera')
 
     await basicReply(ctx, 500, 2000,
       'Hay una cama con sabanas blancas, bastante sucias y descuidadas')
     await basicReply(ctx, 500, 2000,
-      'En una de las paredes hay un closet de madera, lleno de telarañas')
+      'En una de las paredes hay un closet de madera cubierto telarañas')
     await basicReply(ctx, 500, 2000,
       'Al lado del closet hay una puerta roja')
     await basicReply(ctx, 500, 2000,
       'Y del otro lado del closet hay una puerta azul', [
-        'Abre la puerta roja',
-        'Abre la puerta azul',
-        '¿Que hay dentro del closet?'
+        'Usa la puerta roja',
+        'Usa la puerta azul',
+        'Examina el closet'
       ])
   })
-  .hears('Abre la puerta azul', async (ctx) => {
+  .hears(/usa.*puerta.*azul/i, async (ctx) => {
     await basicReply(ctx, 500, 500,
       'Espera')
     await basicReply(ctx, 500, 2000,
       'Tiene seguro :(')
   })
-  .hears('Abre la puerta roja', async (ctx) => {
+  .hears(/usa.*puerta.*roja/i, async (ctx) => {
     await basicReply(ctx, 500, 500,
       'Espera')
 
@@ -49,38 +44,38 @@ module.exports = new Scene('cuartoInicial')
       return
     }
     await basicReply(ctx, 5000, 2000,
-      'Pude abrir la puerta con la llave roja!')
+      'Pude abrir la puerta con la *llave roja*!')
     ctx.scene.enter('encrucijada')
   })
-  .hears(/Que hay dentro del closet/i, async (ctx) => {
+  .hears(/examina.*closet/i, async (ctx) => {
     await basicReply(ctx, 500, 500,
       'Dejame ver')
 
     await basicReply(ctx, 5000, 2000,
       'Tiene mucha ropa y unos cajones, no se que hacer!!',
       [
-        'Busca en los cajones',
-        'Saca toda la ropa',
-        'Describeme lo que ves a tu al rededor'
+        'Examina los cajones',
+        'Examina la ropa',
+        'Describeme lo que ves a tu alrededor'
       ])
   })
-  .hears('Busca en los cajones', async (ctx) => {
+  .hears(/examina.*cajones/i, async (ctx) => {
     await basicReply(ctx, 500, 500,
       'Un momento...')
     await basicReply(ctx, 0, 2000,
-      'Hay una libreta en blanco')
+      'Hay una libreta en blanco, pero no parece importante.')
   })
-  .hears('Saca toda la ropa', async (ctx) => {
+  .hears(/examina.*ropa/i, async (ctx) => {
     await basicReply(ctx, 500, 500,
       'Entendido! dame un minuto')
     await basicReply(ctx, 15000, 3000,
-      'Uno de estos pantalones me quedo muy bien, creo que me lo voy a quedar, seguiré bajando la ropa...')
+      'Uno de estos pantalones me queda muy bien, que me lo voy a quedar, seguiré buscando en la ropa...')
     await basicReply(ctx, 10000, 3000,
-      'Encontré una llave roja!',
+      'Encontré una *llave roja* en la bolsa de una bata!',
       [
-        'Abre la puerta roja',
-        'Abre la puerta azul',
-        'Describeme lo que ves a tu al rededor'
+        'Usa la puerta roja',
+        'Usa la puerta azul',
+        'Describeme lo que ves a tu alrededor'
       ])
     ctx.session.inventory.llave_roja = true
   })
