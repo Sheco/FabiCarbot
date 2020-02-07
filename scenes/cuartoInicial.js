@@ -67,6 +67,16 @@ module.exports = new Scene('cuartoInicial')
       'Hay una libreta en blanco, pero no parece importante.')
   })
   .hears(/\bexamina\b.*\bropa\b/i, async (ctx) => {
+    if (ctx.session.inventory.llave_roja) {
+      await basicReply(ctx, 500, 500,
+        'Pero si la revisé bien! :confused:')
+      await basicReply(ctx, 2000, 2000,
+        'Espera, encontre una nota en otro pantalón')
+      // TODO: enviar la nota como foto
+      await basicReply(ctx, 500, 2000,
+        'La nota dice: El que lea esto es un huevo podrido')
+      return
+    }
     await basicReply(ctx, 500, 500,
       'Entendido! dame un minuto')
     await basicReply(ctx, 15000, 3000,
@@ -76,6 +86,7 @@ module.exports = new Scene('cuartoInicial')
       [
         'Usa la puerta roja',
         'Usa la puerta azul',
+        'Examina la ropa otra vez',
         'Describe lo que ves a tu alrededor'
       ])
     ctx.session.inventory.llave_roja = true
