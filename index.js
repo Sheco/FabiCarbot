@@ -7,8 +7,12 @@ const bot = new Telegraf(process.env.BOT_TOKEN)
 bot.use(session())
 
 const stage = new Stage()
-const scenes = require('./scenes')
-stage.register(...scenes)
+stage.register(...[
+  require('./scenes/inicio'),
+  require('./scenes/muerte'),
+  require('./scenes/puerta_roja'),
+  require('./scenes/escape')
+])
 
 bot.use(stage.middleware())
 bot.command('start', (ctx) => {
