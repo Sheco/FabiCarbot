@@ -1,4 +1,5 @@
 const Extra = require('telegraf/extra')
+const emoji = require('node-emoji')
 
 exports.sleep = function (ms) {
   return new Promise((resolve) => {
@@ -18,7 +19,7 @@ exports.basicKeyboard = function (options) {
 
 exports.basicReply = async function (ctx, waitDelay, typingDelay, message, options) {
   await exports.typing(ctx, waitDelay, typingDelay)
-  return ctx.replyWithMarkdown(message, options ? exports.basicKeyboard(options) : null)
+  return ctx.replyWithMarkdown(emoji.emojify(message), options ? exports.basicKeyboard(options) : null)
 }
 
 exports.conditionalList = function (list) {
