@@ -12,7 +12,7 @@ exports.typing = async function (ctx, waitDelay, typingDelay) {
 }
 
 exports.basicKeyboard = function (options) {
-  return Extra.markup((markup) => markup.resize().oneTime()
+  return Extra.markup((markup) => markup.resize()
     .keyboard(options))
 }
 
