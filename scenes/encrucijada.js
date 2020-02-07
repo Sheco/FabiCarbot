@@ -22,15 +22,13 @@ module.exports = new Scene('encrucijada')
       await basicReply(ctx, 500, 3000,
         'Hay rayos laser invisibles en este pasillo, con el polvo los puedo ver')
       await basicReply(ctx, 500, 3000,
-        'Creo que puedo acercarme a la puerta ahora')
+        'Creo que puedo acercarme a la *puerta* ahora')
     } else {
       await basicReply(ctx, 0, 2000,
-        'En el pasillo de la izquierda hay una puerta, con un letrero')
-      await basicReply(ctx, 0, 2000,
-        'El letrero dice "CUIDADO"')
+        'En el pasillo de la izquierda hay una *puerta*, con un letrero que dice `CUIDADO`')
     }
     await basicReply(ctx, 0, 2000,
-      'En el centro esta la puerta roja de donde vine')
+      'En el centro esta la *puerta roja* de donde vine')
 
     await basicReply(ctx, 0, 500,
       '¿Que hago ahora?',
@@ -65,7 +63,7 @@ module.exports = new Scene('encrucijada')
     await basicReply(ctx, 500, 2000,
       'Puedo escabullirme entre los lasers...')
     await basicReply(ctx, 500, 2000,
-      'La puerta tiene un candado que necesita una combinación',
+      'La puerta tiene un candado que necesita una *combinación*',
       conditionalList([
         ['Pon 0000', ctx.session.state.combinacionEncrucijada],
         ['Explora el extremo de la derecha', true],
@@ -73,7 +71,7 @@ module.exports = new Scene('encrucijada')
       ]))
   })
   .hears(/usa.*polvo/i, async (ctx) => {
-    await basicReply(ctx, 500, 1000, 'Buena idea! soplare para crear una nube de polvo :dash:')
+    await basicReply(ctx, 500, 1000, 'Buena idea! soplare para crear una nube de *polvo* :dash:')
     await basicReply(ctx, 500, 2000,
       'Esta funcionando! veo algo!',
       [
@@ -83,7 +81,7 @@ module.exports = new Scene('encrucijada')
   })
   .hears(/extremo.*derecha/i, async (ctx) => {
     await basicReply(ctx, 500, 500, 'Voy')
-    await basicReply(ctx, 500, 1000, 'Hay una hoja de papel tirada, parece una lista del super',
+    await basicReply(ctx, 500, 1000, 'Hay una *nota de papel* tirada, parece una lista del super',
       [
         'Lee la nota',
         'Usa la puerta de la izquierda',
@@ -100,6 +98,6 @@ module.exports = new Scene('encrucijada')
       return
     }
     await basicReply(ctx, 500, 2000,
-      'Si funciona la contraseña, gracias! he logrado salir!')
+      'Funcionó la *combinación*, gracias! he logrado salir!')
     ctx.scene.enter('muerte')
   })

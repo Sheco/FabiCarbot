@@ -32,7 +32,7 @@ module.exports = new Scene('inicio')
     await basicReply(ctx, 500, 2000,
       'Soy Fabi Carbot, soy aficionada de la ciencia')
     await basicReply(ctx, 500, 2000,
-      'Normalmente llevo una vida muy tranquila pero ahorita estoy en problemas')
+      'Normalmente llevo una vida muy tranquila pero ahorita estoy en problemas :cry:')
     await basicReply(ctx, 500, 2000,
       'Ayudame')
   })
