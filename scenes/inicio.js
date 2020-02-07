@@ -34,7 +34,7 @@ module.exports = new Scene('inicio')
   .hears(/\bquien eres?\b/i, async (ctx) => {
     await sleep(500)
     await ctx.basicReply(2000,
-      'Soy Fabi Carbot, soy aficionada de la ciencia')
+      'Soy Fabi Carbot, aficionada de las ciencias')
 
     await sleep(500)
     await ctx.basicReply(2000,
