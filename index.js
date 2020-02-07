@@ -1,10 +1,14 @@
 const Telegraf = require('telegraf')
 const session = require('telegraf/session')
 const Stage = require('telegraf/stage')
+const Context = require('./context')
 const { basicReply } = require('./helper')
 require('dotenv').config()
 
-const bot = new Telegraf(process.env.BOT_TOKEN)
+const bot = new Telegraf(process.env.BOT_TOKEN,
+  {
+    contextType: Context
+  })
 bot.use(session())
 
 const stage = new Stage()
