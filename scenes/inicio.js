@@ -13,13 +13,13 @@ module.exports = new Scene('inicio')
       '¿Podemos hablar?',
       ['Si', 'No', '¿Quien eres?'])
   })
-  .hears(/no/i, async (ctx) => {
+  .hears(/\bno\b/i, async (ctx) => {
     await basicReply(ctx, 500, 1500,
       'No importa, te lo tengo que decir de todas maneras')
 
     await ctx.scene.enter('cuartoInicial')
   })
-  .hears(/(si|ok|esta bien)/i, async (ctx) => {
+  .hears(/\b(si|ok|esta bien)\b/i, async (ctx) => {
     await basicReply(ctx, 500, 1500,
       'Excelente! no sabes que alegría me da leer eso!')
     await basicReply(ctx, 0, 5000,
@@ -28,7 +28,7 @@ module.exports = new Scene('inicio')
       'Aquí el gobierno tiene un aparato de control mental y no puede pensar claramente, tienes que decirme que hacer para poder escapar.')
     await ctx.scene.enter('cuartoInicial')
   })
-  .hears(/quien eres?/i, async (ctx) => {
+  .hears(/\bquien eres?\b/i, async (ctx) => {
     await basicReply(ctx, 500, 2000,
       'Soy Fabi Carbot, soy aficionada de la ciencia')
     await basicReply(ctx, 500, 2000,

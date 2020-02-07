@@ -12,7 +12,7 @@ module.exports = new Scene('cuartoInicial')
         'Describe lo que ves a tu alrededor'
       ])
   })
-  .hears(/describe.*alrededor/i, async (ctx) => {
+  .hears(/\bdescribe\b.*\balrededor\b/i, async (ctx) => {
     await basicReply(ctx, 500, 2000,
       'Estoy en un cuarto pequeño, las ventanas estan cerradas con madera')
 
@@ -29,13 +29,13 @@ module.exports = new Scene('cuartoInicial')
         'Examina el closet'
       ])
   })
-  .hears(/usa.*puerta.*azul/i, async (ctx) => {
+  .hears(/\busa\b.*\bpuerta\b.*\bazul\b/i, async (ctx) => {
     await basicReply(ctx, 500, 500,
       'Espera')
     await basicReply(ctx, 500, 2000,
       'Tiene seguro :neutral_face:')
   })
-  .hears(/usa.*puerta.*roja/i, async (ctx) => {
+  .hears(/\busa\b.*\bpuerta\b.*\broja\b/i, async (ctx) => {
     await basicReply(ctx, 500, 500,
       'Espera')
 
@@ -48,7 +48,7 @@ module.exports = new Scene('cuartoInicial')
       'Pude abrir la puerta con la *llave roja*!')
     ctx.scene.enter('encrucijada')
   })
-  .hears(/examina.*closet/i, async (ctx) => {
+  .hears(/\bexamina\b.*\bcloset\b/i, async (ctx) => {
     await basicReply(ctx, 500, 500,
       'Dejame ver')
 
@@ -60,13 +60,13 @@ module.exports = new Scene('cuartoInicial')
         'Describe lo que ves a tu alrededor'
       ])
   })
-  .hears(/examina.*cajones/i, async (ctx) => {
+  .hears(/\bexamina\b.*\bcajones\b/i, async (ctx) => {
     await basicReply(ctx, 500, 500,
       'Un momento...')
     await basicReply(ctx, 0, 2000,
       'Hay una libreta en blanco, pero no parece importante.')
   })
-  .hears(/examina.*ropa/i, async (ctx) => {
+  .hears(/\bexamina\b.*\bropa\b/i, async (ctx) => {
     await basicReply(ctx, 500, 500,
       'Entendido! dame un minuto')
     await basicReply(ctx, 15000, 3000,

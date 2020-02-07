@@ -10,7 +10,7 @@ module.exports = new Scene('encrucijada')
         'Describeme lo que hay a tu alrededor'
       ])
   })
-  .hears(/alrededor/i, async (ctx) => {
+  .hears(/\balrededor\b/i, async (ctx) => {
     await basicReply(ctx, 0, 2000,
       'Es una rara habitación con forma de V')
     if (!ctx.session.inventory.botellaPolvo) {
@@ -39,18 +39,18 @@ module.exports = new Scene('encrucijada')
         ['Explora el extremo de la derecha', true]
       ]))
   })
-  .hears(/usa.*puerta.*roja/i, async (ctx) => {
+  .hears(/\busa\b.*\bpuerta\b.*\broja\b/i, async (ctx) => {
     await basicReply(ctx, 500, 1000, 'voy')
     ctx.scene.enter('cuartoInicial')
   })
-  .hears(/botella/i, async (ctx) => {
+  .hears(/\bbotella\b/i, async (ctx) => {
     ctx.session.inventory.botellaPolvo = true
     await basicReply(ctx, 500, 2000,
       'Listo, ya guardé la *botella* .', [
         'Usa el polvo, soplandolo'
       ])
   })
-  .hears(/puerta.*izquierda/i, async (ctx) => {
+  .hears(/\bpuerta\b.*\bizquierda\b/i, async (ctx) => {
     await basicReply(ctx, 500, 500, 'Voy')
     if (!ctx.session.state.lasersRevelados) {
       await basicReply(ctx, 3000, 2000,
@@ -70,7 +70,7 @@ module.exports = new Scene('encrucijada')
         ['Describeme lo que hay a tu alrededor', true]
       ]))
   })
-  .hears(/usa.*polvo/i, async (ctx) => {
+  .hears(/\busa\b.*\bpolvo\b/i, async (ctx) => {
     await basicReply(ctx, 500, 1000, 'Buena idea! soplare para crear una nube de *polvo* :dash:')
     await basicReply(ctx, 500, 2000,
       'Esta funcionando! veo algo!',
@@ -79,7 +79,7 @@ module.exports = new Scene('encrucijada')
       ])
     ctx.session.state.lasersRevelados = true
   })
-  .hears(/extremo.*derecha/i, async (ctx) => {
+  .hears(/\bextremo\b.*\bderecha\b/i, async (ctx) => {
     await basicReply(ctx, 500, 500, 'Voy')
     await basicReply(ctx, 500, 1000, 'Hay una *nota de papel* tirada, parece una lista del super',
       [
@@ -88,12 +88,12 @@ module.exports = new Scene('encrucijada')
         'Describeme lo que hay a tu alrededor'
       ])
   })
-  .hears(/lee.*nota/i, async (ctx) => {
+  .hears(/\blee\b.*\bnota\b/i, async (ctx) => {
     await basicReply(ctx, 500, 500, 'Dice esto...')
     await basicReply(ctx, 500, 3000, '0 Leche\n0 Huevos\n0 Pistola NERF\n0 Dulces')
     ctx.session.state.combinacionEncrucijada = true
   })
-  .hears(/0000/i, async (ctx) => {
+  .hears(/\b0000\b/i, async (ctx) => {
     if (!ctx.session.state.combinacionEncrucijada) {
       return
     }
