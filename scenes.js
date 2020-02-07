@@ -29,11 +29,11 @@ module.exports = [
 
   new Scene('escape')
     .enter(async (ctx) => {
-      await basicReply(ctx, 0, 3000,
+      await basicReply(ctx, 0, 5000,
         'Estoy en problemas y necesito tu ayuda... estaba trabajando en uno de mis inventos y accidentalmente viaje a otro universo')
-      await basicReply(ctx, 0, 3000,
+      await basicReply(ctx, 0, 5000,
         'Aquí el gobierno tiene un aparato de control mental y nadie puede tomar decisiones inteligentes, por lo tanto tu me tienes que decir que hacer para poder escapar.')
-      await basicReply(ctx, 0, 3000,
+      await basicReply(ctx, 0, 5000,
         'Estoy en un cuarto cerrado, veo una cama, un closet y dos puertas, una es roja y la otra es azul',
         [
           'Abre la puerta roja',
