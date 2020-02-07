@@ -21,10 +21,12 @@ exports.basicReply = async function (ctx, waitDelay, typingDelay, message, optio
   return ctx.reply(message, options ? exports.basicKeyboard(options) : null)
 }
 
-exports.conditionalList = function * (list) {
+exports.conditionalList = function (list) {
+  const arr = []
   for (const [text, condition] of list) {
     if (condition) {
-      yield text
+      arr.push(text)
     }
   }
+  return arr
 }

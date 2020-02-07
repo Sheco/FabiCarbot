@@ -1,17 +1,21 @@
 const Telegraf = require('telegraf')
 const session = require('telegraf/session')
 const Stage = require('telegraf/stage')
+const { basicReply } = require('./helper')
 require('dotenv').config()
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
 bot.use(session())
 
 const stage = new Stage()
+function scene (name) {
+  return require('./scenes/' + name)
+}
 stage.register(...[
-  require('./scenes/inicio'),
-  require('./scenes/muerte'),
-  require('./scenes/puerta_roja'),
-  require('./scenes/escape')
+  scene('inicio'),
+  scene('muerte'),
+  scene('cuartoInicial'),
+  scene('encrucijada')
 ])
 
 bot.use(stage.middleware())
@@ -22,13 +26,22 @@ bot.command('start', (ctx) => {
 })
 bot.command('enter', (ctx) => {
   const args = ctx.update.message.text.split(' ')
+  ctx.session.inventory = {}
+  ctx.session.state = {}
   if (args.length === 1) {
     return
   }
-  console.log('entrando a escena ', args[1])
   try {
     ctx.scene.enter(args[1])
   } catch {
+  }
+})
+bot.hears('inventario', async (ctx) => {
+  if (ctx.session.inventory.llave_roja) {
+    await basicReply('Tengo una llave roja')
+  }
+  if (ctx.session.inventory.polvo) {
+    await basicReply('Tengo una botella de polvo')
   }
 })
 

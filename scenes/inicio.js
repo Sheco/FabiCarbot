@@ -6,22 +6,28 @@ module.exports = new Scene('inicio')
     const name = ctx.update.message.from.first_name
 
     await basicReply(ctx, 500, 1000,
-      `oh, hola ${name}! que suerte que me hablas, puedo hablar contigo?`,
+      `Hola ${name}! que suerte que me hablas!!!`)
+
+    await basicReply(ctx, 500, 1000,
+      '¿Podemos hablar?',
       ['Si', 'No', '¿Quien eres?'])
   })
   .hears(/no/i, async (ctx) => {
     await basicReply(ctx, 500, 1500,
-      'No importa, te lo contare de todas maneras.')
+      'No importa, te lo tengo que decir de todas maneras')
 
-    await ctx.scene.enter('escape')
+    await ctx.scene.enter('cuartoInicial')
   })
   .hears(/si/i, async (ctx) => {
     await basicReply(ctx, 500, 1500,
-      'De acuerdo, mira, te voy a contar...')
-    await ctx.scene.enter('escape')
+      'Excelente! no sabes que alegría me da leer eso')
+    await ctx.scene.enter('cuartoInicial')
   })
   .hears(/quien eres?/i, async (ctx) => {
-    await basicReply(ctx, 500, 3000,
-      'Eso no importa ahorita, necesito contarte algo, ayudame por favor, di que si, di que si',
-      ['Si', 'No'])
+    await basicReply(ctx, 500, 2000,
+      'Soy Fabi Carbot, soy aficionada de la ciencia')
+    await basicReply(ctx, 500, 2000,
+      'Normalmente llevo una vida muy tranquila pero ahorita estoy en problemas')
+    await basicReply(ctx, 500, 2000,
+      'Ayudame')
   })
