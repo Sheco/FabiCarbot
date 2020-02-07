@@ -9,7 +9,7 @@ module.exports = new Scene('cuartoInicial')
       [
         'Usa la puerta roja',
         'Usa la puerta azul',
-        'Describeme lo que ves a tu alrededor'
+        'Describe lo que ves a tu alrededor'
       ])
   })
   .hears(/describe.*alrededor/i, async (ctx) => {
@@ -57,7 +57,7 @@ module.exports = new Scene('cuartoInicial')
       [
         'Examina los cajones',
         'Examina la ropa',
-        'Describeme lo que ves a tu alrededor'
+        'Describe lo que ves a tu alrededor'
       ])
   })
   .hears(/examina.*cajones/i, async (ctx) => {
@@ -76,7 +76,7 @@ module.exports = new Scene('cuartoInicial')
       [
         'Usa la puerta roja',
         'Usa la puerta azul',
-        'Describeme lo que ves a tu alrededor'
+        'Describe lo que ves a tu alrededor'
       ])
     ctx.session.inventory.llave_roja = true
   })
