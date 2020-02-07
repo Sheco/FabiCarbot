@@ -20,9 +20,9 @@ module.exports = new Scene('inicio')
   })
   .hears(/(si|ok|esta bien)/i, async (ctx) => {
     await basicReply(ctx, 500, 1500,
-      'Excelente! no sabes que alegría me da leer eso')
+      'Excelente! no sabes que alegría me da leer eso!')
     await basicReply(ctx, 0, 5000,
-      'Estoy en problemas y necesito tu ayuda... estaba trabajando en uno de mis inventos y accidentalmente viaje a otro universo')
+      'Estoy en problemas y necesito tu ayuda... estaba trabajando en uno de mis inventos y accidentalmente viaje a otro universo :sweat:')
     await basicReply(ctx, 0, 5000,
       'Aquí el gobierno tiene un aparato de control mental y no puede pensar claramente, tienes que decirme que hacer para poder escapar.')
     await ctx.scene.enter('cuartoInicial')

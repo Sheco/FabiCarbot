@@ -32,7 +32,7 @@ module.exports = new Scene('cuartoInicial')
     await basicReply(ctx, 500, 500,
       'Espera')
     await basicReply(ctx, 500, 2000,
-      'Tiene seguro :(')
+      'Tiene seguro :neutral_face:')
   })
   .hears(/usa.*puerta.*roja/i, async (ctx) => {
     await basicReply(ctx, 500, 500,
@@ -40,7 +40,7 @@ module.exports = new Scene('cuartoInicial')
 
     if (!ctx.session.inventory.llave_roja) {
       await basicReply(ctx, 5000, 2000,
-        'Tiene seguro :(')
+        'Tiene seguro :neutral_face:')
       return
     }
     await basicReply(ctx, 5000, 2000,

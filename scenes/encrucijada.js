@@ -14,7 +14,7 @@ module.exports = new Scene('encrucijada')
       'Es una rara habitación con forma de V')
     if (!ctx.session.inventory.botellaPolvo) {
       await basicReply(ctx, 0, 2000,
-        'En el piso veo una botella con un polvo blanco, muy fino')
+        'En el piso veo una *botella con un polvo blanco*, muy fino')
     }
 
     if (ctx.session.state.lasersRevelados) {
@@ -47,7 +47,7 @@ module.exports = new Scene('encrucijada')
   .hears(/botella/i, async (ctx) => {
     ctx.session.inventory.botellaPolvo = true
     await basicReply(ctx, 500, 2000,
-      'Listo, he metido la botella en mis pantalones nuevos.', [
+      'Listo, ya guardé la *botella* .', [
         'Usa el polvo, soplandolo'
       ])
   })
@@ -57,12 +57,12 @@ module.exports = new Scene('encrucijada')
       await basicReply(ctx, 3000, 2000,
         'No se que signifique el letrero que esta junto a la puerta')
       await basicReply(ctx, 500, 2000,
-        'Auxilio, me estoy derritiendoooooooo')
+        'Auxilio, unos lasers!! me estoy derritiendoooooooo :dizzy_face:')
       await ctx.scene.enter('muerte')
       return
     }
     await basicReply(ctx, 500, 2000,
-      'Puedo escabullirme entre los lasers')
+      'Puedo escabullirme entre los lasers...')
     await basicReply(ctx, 500, 2000,
       'La puerta tiene un candado que necesita una combinación',
       conditionalList([
@@ -72,7 +72,7 @@ module.exports = new Scene('encrucijada')
       ]))
   })
   .hears(/usa.*polvo/i, async (ctx) => {
-    await basicReply(ctx, 500, 1000, 'Buena idea! soplare para crear una nube de polvo')
+    await basicReply(ctx, 500, 1000, 'Buena idea! soplare para crear una nube de polvo :dash:')
     await basicReply(ctx, 500, 2000,
       'Esta funcionando! veo algo!',
       [
