@@ -53,11 +53,16 @@ module.exports = new Scene('encrucijada')
   .hears(/\bpuerta\b.*\bizquierda\b/i, async (ctx) => {
     await basicReply(ctx, 500, 500, 'Voy')
     if (!ctx.session.state.lasersRevelados) {
-      await basicReply(ctx, 3000, 2000,
-        'No se que signifique el letrero que esta junto a la puerta')
+      if (!ctx.session.state.lasersConocidos) {
+        await basicReply(ctx, 3000, 2000,
+          'No se que signifique el letrero que esta junto a la *puerta*')
+      }
       await basicReply(ctx, 500, 2000,
         'Auxilio, unos lasers!! me estoy derritiendoooooooo :dizzy_face:')
-      await ctx.scene.enter('muerte')
+
+      await basicReply(ctx, 4000, 2000,
+        'De suerte no me pasó nada malo, no me pidas que lo vuelva a hacer porfa :confounded:')
+      ctx.session.state.lasersConocidos = true
       return
     }
     await basicReply(ctx, 500, 2000,
