@@ -20,3 +20,11 @@ exports.basicReply = async function (ctx, waitDelay, typingDelay, message, optio
   await exports.typing(ctx, waitDelay, typingDelay)
   return ctx.reply(message, options ? exports.basicKeyboard(options) : null)
 }
+
+exports.conditionalList = function * (list) {
+  for (const [text, condition] of list) {
+    if (condition) {
+      yield text
+    }
+  }
+}

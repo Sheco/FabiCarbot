@@ -1,13 +1,6 @@
 const Scene = require('telegraf/scenes/base')
 const { basicReply } = require('./helper')
 
-function * conditionalList(list) {
-  for (let [text, condition] of list) {
-    if (condition) {
-      yield text
-    }
-  }
-}
 
 module.exports = [
   new Scene('inicio')
