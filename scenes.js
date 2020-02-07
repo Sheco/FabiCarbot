@@ -55,7 +55,7 @@ module.exports = [
       await basicReply(ctx, 500, 500,
         'Espera')
 
-      if (!ctx.session.inventory['llave-roja']) {
+      if (!ctx.session.inventory.llave_roja) {
         await basicReply(ctx, 5000, 2000,
           'Tiene seguro :(',
           [
@@ -99,7 +99,7 @@ module.exports = [
           'Abre la puerta roja',
           'Abre la puerta azul'
         ])
-      ctx.session.inventory['llave-roja'] = true
+      ctx.session.inventory.llave_roja = true
     }),
 
   // PUERTA ROJA
