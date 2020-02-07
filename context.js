@@ -4,8 +4,7 @@ const emoji = require('node-emoji')
 const { sleep } = require('./helper')
 
 class CustomContext extends Context {
-  async typing (waitDelay, typingDelay) {
-    await sleep(waitDelay)
+  async typing (typingDelay) {
     await this.replyWithChatAction('typing')
     return sleep(typingDelay)
   }
@@ -15,8 +14,8 @@ class CustomContext extends Context {
       .keyboard(options))
   }
 
-  async basicReply (waitDelay, typingDelay, message, options) {
-    await this.typing(waitDelay, typingDelay)
+  async basicReply (typingDelay, message, options) {
+    await this.typing(typingDelay)
     return this.replyWithMarkdown(emoji.emojify(message), options ? this.basicKeyboard(options) : null)
   }
 }
