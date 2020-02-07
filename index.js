@@ -11,10 +11,21 @@ const scenes = require('./scenes')
 stage.register(...scenes)
 
 bot.use(stage.middleware())
-bot.command('/start', (ctx) => {
+bot.command('start', (ctx) => {
   ctx.session.inventory = {}
   ctx.session.state = {}
   ctx.scene.enter('inicio')
+})
+bot.command('enter', (ctx) => {
+  const args = ctx.update.message.text.split(' ')
+  if (args.length === 1) {
+    return
+  }
+  console.log('entrando a escena ', args[1])
+  try {
+    ctx.scene.enter(args[1])
+  } catch {
+  }
 })
 
 bot.launch()
