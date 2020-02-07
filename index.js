@@ -11,19 +11,21 @@ const stage = new Stage()
 function scene (name) {
   return require('./scenes/' + name)
 }
-stage.register(...[
+stage.register(
   scene('inicio'),
   scene('muerte'),
   scene('cuartoInicial'),
   scene('encrucijada')
-])
+)
 
 bot.use(stage.middleware())
+
 bot.command('start', (ctx) => {
   ctx.session.inventory = {}
   ctx.session.state = {}
   ctx.scene.enter('inicio')
 })
+
 bot.command('enter', (ctx) => {
   const args = ctx.update.message.text.split(' ')
   ctx.session.inventory = {}
@@ -31,13 +33,16 @@ bot.command('enter', (ctx) => {
   if (args.length === 1) {
     return
   }
-  try {
-    ctx.scene.enter(args[1])
-  } catch (e) {
+  const name = args[1]
+
+  if (!ctx.scene.scenes.has(name)) {
+    return
   }
+
+  ctx.scene.enter(name)
 })
 bot.hears('inventario', async (ctx) => {
-  if(!ctx.session.inventory) {
+  if (!ctx.session.inventory) {
     return
   }
 
