@@ -4,7 +4,7 @@ const { sleep, conditionalList } = require('../helper')
 module.exports = new Scene('encrucijada')
   .enter(async (ctx) => {
     console.log('Encrucijada:', ctx.update.message.from.first_name)
-    await ctx.basicReply(0, 3000,
+    await ctx.basicReply(3000,
       'Estoy en una habitación en forma de V, estoy en el centro, en la esquina',
       [
         'Describeme lo que hay a tu alrededor'
