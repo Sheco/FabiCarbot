@@ -13,6 +13,8 @@ module.exports = new Scene('cuartoInicial')
       ])
   })
   .hears(/\bdescribe\b.*\balrededor\b/i, async (ctx) => {
+    ctx.setState('busy')
+
     await sleep(500)
     await ctx.basicReply(2000,
       'Estoy en un cuarto pequeño, las ventanas estan cerradas con madera')
@@ -36,8 +38,12 @@ module.exports = new Scene('cuartoInicial')
         'Usa la puerta azul',
         'Examina el closet'
       ])
+
+    ctx.removeState('busy')
   })
   .hears(/\busa\b.*\bpuerta\b.*\bazul\b/i, async (ctx) => {
+    ctx.setState('busy')
+
     await sleep(500)
     await ctx.basicReply(500,
       'Espera')
@@ -45,24 +51,34 @@ module.exports = new Scene('cuartoInicial')
     await sleep(500)
     await ctx.basicReply(2000,
       'Tiene seguro :neutral_face:')
+
+    ctx.removeState('busy')
   })
   .hears(/\busa\b.*\bpuerta\b.*\broja\b/i, async (ctx) => {
+    ctx.setState('busy')
+
     await sleep(500)
     await ctx.basicReply(500,
       'Espera')
 
-    if (!ctx.session.inventory.llave_roja) {
+    if (!ctx.has('llave_roja')) {
       await sleep(5000)
       await ctx.basicReply(2000,
         'Tiene seguro :neutral_face:')
+
+      ctx.removeState('busy')
       return
     }
     await sleep(5000)
     await ctx.basicReply(2000,
       'Pude abrir la puerta con la *llave roja*!')
+    ctx.removeState('busy')
+
     ctx.scene.enter('encrucijada')
   })
   .hears(/\bexamina\b.*\bcloset\b/i, async (ctx) => {
+    ctx.setState('busy')
+
     await sleep(500)
     await ctx.basicReply(500,
       'Dejame ver')
@@ -75,16 +91,24 @@ module.exports = new Scene('cuartoInicial')
         'Examina la ropa',
         'Describe lo que ves a tu alrededor'
       ])
+
+    ctx.removeState('busy')
   })
   .hears(/\bexamina\b.*\bcajones\b/i, async (ctx) => {
+    ctx.setState('busy')
+
     await sleep(500)
     await ctx.basicReply(500,
       'Un momento...')
     await ctx.basicReply(2000,
       'Hay una libreta en blanco, pero no parece importante.')
+
+    ctx.removeState('busy')
   })
   .hears(/\bexamina\b.*\bropa\b/i, async (ctx) => {
-    if (ctx.session.inventory.llave_roja) {
+    ctx.setState('busy')
+
+    if (ctx.has('llave_roja')) {
       await sleep(500)
       await ctx.basicReply(500,
         'Pero si la revisé bien! :confused:')
@@ -98,6 +122,7 @@ module.exports = new Scene('cuartoInicial')
       await ctx.basicReply(2000,
         'La nota dice: El que lea esto es un huevo podrido')
 
+      ctx.removeState('busy')
       return
     }
     await sleep(500)
@@ -117,5 +142,7 @@ module.exports = new Scene('cuartoInicial')
         'Examina la ropa otra vez',
         'Describe lo que ves a tu alrededor'
       ])
-    ctx.session.inventory.llave_roja = true
+
+    ctx.removeState('busy')
+    ctx.give('llave_roja')
   })

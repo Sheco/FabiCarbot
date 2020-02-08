@@ -4,6 +4,30 @@ const emoji = require('node-emoji')
 const { sleep } = require('./helper')
 
 class CustomContext extends Context {
+  is (state) {
+    return this.session.state && this.session.state[state]
+  }
+
+  has (item) {
+    return this.session.inventory && this.session.inventory[item]
+  }
+
+  give (item) {
+    this.session.inventory[item] = true
+  }
+
+  takeAway (item) {
+    delete this.session.inventory[item]
+  }
+
+  setState (state) {
+    this.session.state[state] = true
+  }
+
+  removeState (state) {
+    delete this.session.state[state]
+  }
+
   async typing (typingDelay) {
     await this.replyWithChatAction('typing')
     return sleep(typingDelay)

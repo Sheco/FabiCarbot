@@ -15,13 +15,19 @@ module.exports = new Scene('inicio')
       ['Si', 'No', '¿Quien eres?'])
   })
   .hears(/\bno\b/i, async (ctx) => {
+    ctx.setState('busy')
+
     await sleep(500)
     await ctx.basicReply(1500,
       'No importa, te lo tengo que decir de todas maneras')
 
     await ctx.scene.enter('cuartoInicial')
+
+    ctx.removeState('busy')
   })
   .hears(/\b(si|ok|esta bien)\b/i, async (ctx) => {
+    ctx.setState('busy')
+
     await sleep(500)
     await ctx.basicReply(1500,
       'Excelente! no sabes que alegría me da leer eso!')
@@ -30,8 +36,12 @@ module.exports = new Scene('inicio')
     await ctx.basicReply(5000,
       'Aquí el gobierno tiene un aparato de control mental y no puedo pensar claramente, tienes que decirme que hacer para poder escapar.')
     await ctx.scene.enter('cuartoInicial')
+
+    ctx.removeState('busy')
   })
   .hears(/\bquien eres?\b/i, async (ctx) => {
+    ctx.setState('busy')
+
     await sleep(500)
     await ctx.basicReply(2000,
       'Soy Fabi Carbot, aficionada de las ciencias')
@@ -43,4 +53,6 @@ module.exports = new Scene('inicio')
     await sleep(500)
     await ctx.basicReply(2000,
       'Ayudame')
+
+    ctx.removeState('busy')
   })
