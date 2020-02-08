@@ -22,7 +22,15 @@ stage.register(
   scene('encrucijada')
 )
 
-bot.use(stage.middleware())
+const stageMiddleware = stage.middleware()
+
+bot.use((ctx, next) => {
+  if (ctx.session.state && ctx.session.state.busy) {
+    console.log('ignorando mensaje', ctx.update.message)
+    return next()
+  }
+  return stageMiddleware(ctx, next)
+})
 
 bot.command('start', (ctx) => {
   ctx.session.inventory = {}
