@@ -58,10 +58,14 @@ module.exports = new Scene('encrucijada')
   .hears(/\bbotella\b/i, async (ctx) => {
     ctx.setState('busy')
     ctx.give('botellaPolvo')
+
     await sleep(500)
     await ctx.basicReply(2000,
-      'Listo, ya guardé la *botella* .', [
-        'Usa el polvo, soplandolo'
+      'La botella dice que sirve para hacer nubes artificiales')
+    await ctx.basicReply(2000,
+      'Modo de empleo: sople el polvo con gracia y delicadeza',
+      [
+        'Usa el polvo!'
       ])
 
     ctx.removeState('busy')
