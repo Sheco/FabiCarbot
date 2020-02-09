@@ -4,10 +4,11 @@ const { sleep } = require('../helper')
 module.exports = new Scene('inicio')
   .enter(async (ctx) => {
     const name = ctx.update.message.from.first_name
+    ctx.reply(`Hola ${name}`)
     console.log('Inicio:', ctx.update.message.from.first_name)
     await sleep(500)
     await ctx.basicReply(1000,
-      `Hola ${name}! que suerte que me hablas!!!`)
+      'Que suerte que me hablas!!!')
 
     await sleep(500)
     await ctx.basicReply(1000,
