@@ -64,6 +64,8 @@ bot.hears('inventario', async (ctx) => {
   }
 })
 
+// localtunnel es un tunel reverso para publicar un puerto
+// local en una URL publica
 localtunnel({ port: process.env.PORT }).then(async (tunnel) => {
   await bot.launch({
     webhook: {
