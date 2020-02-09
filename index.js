@@ -2,6 +2,7 @@ const Telegraf = require('telegraf')
 const session = require('telegraf/session')
 const Stage = require('telegraf/stage')
 const Context = require('./context')
+const localtunnel = require('localtunnel')
 const { basicReply } = require('./helper')
 require('dotenv').config()
 
@@ -66,4 +67,9 @@ bot.hears('inventario', async (ctx) => {
   }
 })
 
-bot.launch()
+localtunnel({ port: 3000 }).then((tunnel) => {
+  bot.launch({
+    domain: tunnel.url,
+    port: 3000
+  })
+})
