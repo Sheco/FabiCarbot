@@ -38,9 +38,9 @@ module.exports = new Scene('encrucijada')
     await ctx.basicReply(500,
       '¿Que hago ahora?',
       conditionalList([
-        ['Agarra la botella de polvo', !ctx.has('botellaPolvo')],
         ['Usa la puerta de la izquierda', true],
         ['Usa la puerta roja', true],
+        ['Agarra la botella de polvo', !ctx.has('botellaPolvo')],
         ['Explora el extremo de la derecha', true]
       ]))
 
@@ -83,11 +83,11 @@ module.exports = new Scene('encrucijada')
       }
       await sleep(500)
       await ctx.basicReply(2000,
-        'Auxilio, unos lasers!! me estoy derritiendoooooooo :dizzy_face:')
+        'Juepuchisss!! algo me dio toque no puedo seguir por aquí :dizzy_face:')
 
-      await sleep(4000)
+      await sleep(500)
       await ctx.basicReply(2000,
-        'De suerte no me pasó nada malo, no me pidas que lo vuelva a hacer porfa :confounded:')
+        'No me pidas que lo vuelva a hacer porfa :confounded:')
 
       ctx.setState('lasersConocidos')
       ctx.removeState('busy')
