@@ -37,12 +37,12 @@ module.exports = new Scene('encrucijada')
 
     await ctx.basicReply(500,
       '¿Que hago ahora?',
-      conditionalList([
-        ['Usa la puerta de la izquierda', true],
-        ['Usa la puerta roja', true],
+      [
+        'Usa la puerta de la izquierda',
+        'Usa la puerta roja',
         ['Agarra la botella de polvo', !ctx.has('botellaPolvo')],
-        ['Explora el extremo de la derecha', true]
-      ]))
+        'Explora el extremo de la derecha'
+      ])
 
     ctx.removeState('busy')
   })
@@ -100,11 +100,11 @@ module.exports = new Scene('encrucijada')
     await sleep(500)
     await ctx.basicReply(2000,
       'La puerta tiene un candado que necesita una *combinación*',
-      conditionalList([
+      [
         ['Pon 0000', ctx.is('combinacionEncrucijada')],
-        ['Explora el extremo de la derecha', true],
-        ['Describeme lo que hay a tu alrededor', true]
-      ]))
+        'Explora el extremo de la derecha',
+        'Describeme lo que hay a tu alrededor'
+      ])
 
     ctx.removeState('busy')
   })

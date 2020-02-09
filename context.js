@@ -1,7 +1,7 @@
 const Context = require('telegraf/context')
 const Extra = require('telegraf/extra')
 const emoji = require('node-emoji')
-const { sleep } = require('./helper')
+const { sleep, conditionalList } = require('./helper')
 
 class CustomContext extends Context {
   is (state) {
@@ -41,7 +41,7 @@ class CustomContext extends Context {
 
   basicKeyboard (options) {
     return Extra.markup((markup) => markup.resize()
-      .keyboard(options))
+      .keyboard(conditionalList(options)))
   }
 
   async basicReply (typingDelay, message, options) {

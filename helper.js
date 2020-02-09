@@ -7,7 +7,14 @@ exports.sleep = function (ms) {
 
 exports.conditionalList = function (list) {
   const arr = []
-  for (const [text, condition] of list) {
+  for (const content of list) {
+    if (typeof (content) === 'string') {
+      arr.push(content)
+      continue
+    }
+
+    const [text, condition] = content
+
     if (condition) {
       arr.push(text)
     }
