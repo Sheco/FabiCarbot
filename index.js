@@ -27,7 +27,7 @@ const stageMiddleware = stage.middleware()
 
 bot.use((ctx, next) => {
   if (ctx.is('busy')) {
-    console.log('ignorando mensaje', ctx.update.message)
+    console.log('ignorando mensaje', ctx.update.message.text)
     return next()
   }
   return stageMiddleware(ctx, next)
@@ -50,6 +50,7 @@ bot.command('enter', (ctx) => {
 
   ctx.scene.enter(name)
 })
+
 bot.hears('inventario', async (ctx) => {
   if (!ctx.session.inventory) {
     return
