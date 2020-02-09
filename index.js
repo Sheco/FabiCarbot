@@ -67,11 +67,11 @@ bot.hears('inventario', async (ctx) => {
   }
 })
 
-localtunnel({ port: 3000 }).then(async (tunnel) => {
+localtunnel({ port: process.env.PORT }).then(async (tunnel) => {
   await bot.launch({
     webhook: {
       domain: tunnel.url,
-      port: 3000
+      port: process.env.PORT
     }
   })
 })
