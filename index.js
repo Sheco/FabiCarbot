@@ -26,7 +26,7 @@ stage.register(
 const stageMiddleware = stage.middleware()
 
 bot.use((ctx, next) => {
-  if (ctx.session.state && ctx.session.state.busy) {
+  if (ctx.is('busy')) {
     console.log('ignorando mensaje', ctx.update.message)
     return next()
   }
@@ -34,15 +34,11 @@ bot.use((ctx, next) => {
 })
 
 bot.command('start', (ctx) => {
-  ctx.session.inventory = {}
-  ctx.session.state = {}
   ctx.scene.enter('inicio')
 })
 
 bot.command('enter', (ctx) => {
   const args = ctx.update.message.text.split(' ')
-  ctx.session.inventory = {}
-  ctx.session.state = {}
   if (args.length === 1) {
     return
   }
@@ -59,10 +55,10 @@ bot.hears('inventario', async (ctx) => {
     return
   }
 
-  if (ctx.session.inventory.llave_roja) {
+  if (ctx.tiene('llave_roja')) {
     await basicReply(ctx, 0, 0, 'Tengo una llave roja')
   }
-  if (ctx.session.inventory.polvo) {
+  if (ctx.tiene('botellaPolvo')) {
     await basicReply(ctx, 0, 0, 'Tengo una botella de polvo')
   }
 })

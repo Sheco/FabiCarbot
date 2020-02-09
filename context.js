@@ -13,6 +13,9 @@ class CustomContext extends Context {
   }
 
   give (item) {
+    if (!this.session.inventory) {
+      this.session.inventory = {}
+    }
     this.session.inventory[item] = true
   }
 
@@ -21,6 +24,9 @@ class CustomContext extends Context {
   }
 
   setState (state) {
+    if (!this.session.state) {
+      this.session.state = {}
+    }
     this.session.state[state] = true
   }
 
