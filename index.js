@@ -2,7 +2,6 @@ const Telegraf = require('telegraf')
 const session = require('telegraf/session')
 const Stage = require('telegraf/stage')
 const Context = require('./context')
-const localtunnel = require('localtunnel')
 const { basicReply } = require('./helper')
 require('dotenv').config()
 
@@ -64,13 +63,13 @@ bot.hears('inventario', async (ctx) => {
   }
 })
 
-// localtunnel es un tunel reverso para publicar un puerto
-// local en una URL publica
-localtunnel({ port: process.env.PORT }).then(async (tunnel) => {
-  await bot.launch({
+if (process.env.webhook) {
+  bot.launch({
     webhook: {
-      domain: tunnel.url,
+      domain: process.env.WEBHOOK_URL,
       port: process.env.PORT
     }
   })
-})
+} else {
+  bot.launch()
+}
