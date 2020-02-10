@@ -33,6 +33,8 @@ bot.use((ctx, next) => {
 })
 
 bot.command('start', (ctx) => {
+  ctx.session.inventory = {}
+  ctx.session.state = {}
   ctx.scene.enter('inicio')
 })
 
