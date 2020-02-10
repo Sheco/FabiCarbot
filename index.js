@@ -56,10 +56,10 @@ bot.hears('inventario', async (ctx) => {
     return
   }
 
-  if (ctx.tiene('llave_roja')) {
+  if (ctx.has('llave_roja')) {
     await basicReply(ctx, 0, 0, 'Tengo una llave roja')
   }
-  if (ctx.tiene('botellaPolvo')) {
+  if (ctx.has('botellaPolvo')) {
     await basicReply(ctx, 0, 0, 'Tengo una botella de polvo')
   }
 })
