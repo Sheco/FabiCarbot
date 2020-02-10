@@ -7,10 +7,10 @@ module.exports = new Scene('encrucijada')
     await ctx.basicReply(3000,
       'Estoy en una habitación en forma de V, estoy en el centro, en la esquina',
       [
-        'Describeme lo que hay a tu alrededor'
+        'Describe lo que hay a tu alrededor'
       ])
   })
-  .hears(/\balrededor\b/i, async (ctx) => {
+  .hears(/\bdescribe\b.*\balrededor\b/i, async (ctx) => {
     ctx.setState('busy')
 
     await ctx.basicReply(2000,
@@ -103,7 +103,7 @@ module.exports = new Scene('encrucijada')
       [
         ['Pon 0000', ctx.is('combinacionEncrucijada')],
         'Explora el extremo de la derecha',
-        'Describeme lo que hay a tu alrededor'
+        'Describe lo que hay a tu alrededor'
       ])
 
     ctx.removeState('busy')
@@ -118,7 +118,7 @@ module.exports = new Scene('encrucijada')
     await ctx.basicReply(2000,
       'Esta funcionando! veo algo!',
       [
-        'Describeme lo que hay a tu alrededor'
+        'Describe lo que hay a tu alrededor'
       ])
     ctx.setState('lasersRevelados')
 
@@ -135,7 +135,7 @@ module.exports = new Scene('encrucijada')
       [
         'Lee la nota',
         'Usa la puerta de la izquierda',
-        'Describeme lo que hay a tu alrededor'
+        'Describe lo que hay a tu alrededor'
       ])
 
     ctx.removeState('busy')
