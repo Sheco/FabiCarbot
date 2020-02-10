@@ -63,7 +63,7 @@ bot.hears('inventario', async (ctx) => {
   }
 })
 
-if (process.env.webhook) {
+if (process.env.WEBHOOK_URL) {
   bot.launch({
     webhook: {
       domain: process.env.WEBHOOK_URL,
