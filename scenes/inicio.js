@@ -53,7 +53,7 @@ module.exports = new Scene('inicio')
 
     await sleep(500)
     await ctx.basicReply(2000,
-      'Ayudame')
+      'Ayudame, por favor, si?')
 
     ctx.removeState('busy')
   })
