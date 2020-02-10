@@ -1,5 +1,5 @@
 const Scene = require('telegraf/scenes/base')
-const { sleep, conditionalList } = require('../helper')
+const { sleep } = require('../helper')
 
 module.exports = new Scene('encrucijada')
   .enter(async (ctx) => {
