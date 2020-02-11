@@ -5,6 +5,11 @@ module.exports = class Player {
     this.session.inventory = session.inventory || {}
   }
 
+  reset () {
+    this.session.state = {}
+    this.session.inventory = {}
+  }
+
   is (state) {
     return this.session.state && this.session.state[state]
   }

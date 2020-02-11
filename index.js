@@ -57,8 +57,7 @@ bot.use((ctx, next) => {
  * Inicializar el juego!
  */
 bot.command('start', (ctx) => {
-  ctx.session.inventory = {}
-  ctx.session.state = {}
+  ctx.player.reset()
   ctx.scene.enter('inicio')
 })
 
@@ -86,10 +85,6 @@ bot.command('enter', (ctx) => {
  * objetos del juego
  */
 bot.hears('inventario', async (ctx) => {
-  if (!ctx.session.inventory) {
-    return
-  }
-
   if (ctx.player.has('llave_roja')) {
     await basicReply(ctx, 0, 0, 'Tengo una llave roja')
   }
