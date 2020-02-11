@@ -92,6 +92,13 @@ bot.hears('inventario', async (ctx) => {
   }
 })
 
+bot.on('message', (ctx) => {
+  if (!ctx.scene.current) {
+    ctx.player.reset()
+    ctx.scene.enter('inicio')
+  }
+})
+
 /* Inicialización del bot */
 if (process.env.WEBHOOK_URL) {
   bot.launch({
