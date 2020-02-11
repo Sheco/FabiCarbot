@@ -1,6 +1,7 @@
 const Telegraf = require('telegraf')
 const Stage = require('telegraf/stage')
 const Context = require('./context')
+const Player = require('./player')
 const { basicReply } = require('./helper')
 require('dotenv').config()
 
@@ -10,7 +11,22 @@ function scene (name) {
 
 const bot = new Telegraf(process.env.BOT_TOKEN,
   { contextType: Context })
-bot.use(Telegraf.session())
+
+/*
+ * Extender el contexto, una vez que la sesión haya sido cargada, entonces
+ * agregar una propiedad, player, que recibe la sesión como almacenamiento
+ *
+ * Lo hice de esta manera porque el middleware de sesión regresa una promesa
+ * que se resuelve en el siguiente tick, por lo que no puedo crear un
+ * middleware normal, porque la sesión no estara inicializada en ese momento
+ */
+const sessionMiddleware = Telegraf.session()
+bot.use((ctx, next) => {
+  return sessionMiddleware(ctx, (ctx) => {
+    ctx.player = new Player(ctx.session)
+    return next()
+  })
+})
 
 /* Cargar las escenas en memoria */
 const stage = new Stage()

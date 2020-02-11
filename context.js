@@ -1,6 +1,5 @@
 const Context = require('telegraf/context')
 const Markup = require('telegraf/markup')
-const Player = require('./player')
 const emoji = require('node-emoji')
 const { sleep, conditionalList } = require('./helper')
 
@@ -9,11 +8,6 @@ const { sleep, conditionalList } = require('./helper')
  * para algunas tareas comúnes
  */
 class CustomContext extends Context {
-  constructor (update, telegram, options) {
-    super(update, telegram, options)
-    this.player = new Player(this)
-  }
-
   async typing (typingDelay) {
     await this.replyWithChatAction('typing')
     return sleep(typingDelay)

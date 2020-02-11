@@ -1,35 +1,37 @@
 module.exports = class Player {
-  constructor (ctx) {
-    this.ctx = ctx
+  constructor (session) {
+    this.session = session
+    this.session.state = session.state || {}
+    this.session.inventory = session.inventory || {}
   }
 
   is (state) {
-    return this.ctx.session.state && this.ctx.session.state[state]
+    return this.session.state && this.session.state[state]
   }
 
   has (item) {
-    return this.ctx.session.inventory && this.ctx.session.inventory[item]
+    return this.session.inventory && this.session.inventory[item]
   }
 
   give (item) {
-    if (!this.ctx.session.inventory) {
-      this.ctx.session.inventory = {}
+    if (!this.session.inventory) {
+      this.session.inventory = {}
     }
-    this.ctx.session.inventory[item] = true
+    this.session.inventory[item] = true
   }
 
   takeAway (item) {
-    delete this.ctx.session.inventory[item]
+    delete this.session.inventory[item]
   }
 
   setState (state) {
-    if (!this.ctx.session.state) {
-      this.ctx.session.state = {}
+    if (!this.session.state) {
+      this.session.state = {}
     }
-    this.ctx.session.state[state] = true
+    this.session.state[state] = true
   }
 
   removeState (state) {
-    delete this.ctx.session.state[state]
+    delete this.session.state[state]
   }
 }
