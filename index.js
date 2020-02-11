@@ -66,11 +66,10 @@ bot.command('start', (ctx) => {
  * y pruebas, te lleva directo a cualquiera de las escenas
  */
 bot.command('enter', (ctx) => {
-  const args = ctx.update.message.text.split(' ')
-  if (args.length === 1) {
+  const [ name ] = ctx.update.message.text.split(' ').splice(1)
+  if (name === undefined) {
     return
   }
-  const name = args[1]
 
   if (!ctx.scene.scenes.has(name)) {
     return
