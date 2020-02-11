@@ -30,7 +30,7 @@ const stageMiddleware = stage.middleware()
  * varias veces cuando ya esta tratando de hacer algo el bot
  */
 bot.use((ctx, next) => {
-  if (ctx.is('busy')) {
+  if (ctx.player.is('busy')) {
     console.log('ignorando mensaje', ctx.update.message.text)
     return next()
   }
@@ -74,10 +74,10 @@ bot.hears('inventario', async (ctx) => {
     return
   }
 
-  if (ctx.has('llave_roja')) {
+  if (ctx.player.has('llave_roja')) {
     await basicReply(ctx, 0, 0, 'Tengo una llave roja')
   }
-  if (ctx.has('botellaPolvo')) {
+  if (ctx.player.has('botellaPolvo')) {
     await basicReply(ctx, 0, 0, 'Tengo una botella de polvo')
   }
 })

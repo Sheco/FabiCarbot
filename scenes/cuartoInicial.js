@@ -13,7 +13,7 @@ module.exports = new Scene('cuartoInicial')
       ])
   })
   .hears(/\bdescribe\b.*\balrededor\b/i, async (ctx) => {
-    ctx.setState('busy')
+    ctx.player.setState('busy')
 
     await sleep(500)
     await ctx.basicReply(2000,
@@ -39,10 +39,10 @@ module.exports = new Scene('cuartoInicial')
         'Examina el closet'
       ])
 
-    ctx.removeState('busy')
+    ctx.player.removeState('busy')
   })
   .hears(/\busa\b.*\bpuerta\b.*\bazul\b/i, async (ctx) => {
-    ctx.setState('busy')
+    ctx.player.setState('busy')
 
     await sleep(500)
     await ctx.basicReply(500,
@@ -52,32 +52,32 @@ module.exports = new Scene('cuartoInicial')
     await ctx.basicReply(2000,
       'Tiene seguro :neutral_face:')
 
-    ctx.removeState('busy')
+    ctx.player.removeState('busy')
   })
   .hears(/\busa\b.*\bpuerta\b.*\broja\b/i, async (ctx) => {
-    ctx.setState('busy')
+    ctx.player.setState('busy')
 
     await sleep(500)
     await ctx.basicReply(500,
       'Espera')
 
-    if (!ctx.has('llave_roja')) {
+    if (!ctx.player.has('llave_roja')) {
       await sleep(5000)
       await ctx.basicReply(2000,
         'Tiene seguro :neutral_face:')
 
-      ctx.removeState('busy')
+      ctx.player.removeState('busy')
       return
     }
     await sleep(5000)
     await ctx.basicReply(2000,
       'Pude abrir la puerta con la *llave roja*!')
-    ctx.removeState('busy')
+    ctx.player.removeState('busy')
 
     ctx.scene.enter('encrucijada')
   })
   .hears(/\bexamina\b.*\bcloset\b/i, async (ctx) => {
-    ctx.setState('busy')
+    ctx.player.setState('busy')
 
     await sleep(500)
     await ctx.basicReply(500,
@@ -92,10 +92,10 @@ module.exports = new Scene('cuartoInicial')
         'Describe lo que ves a tu alrededor'
       ])
 
-    ctx.removeState('busy')
+    ctx.player.removeState('busy')
   })
   .hears(/\bexamina\b.*\bcajones\b/i, async (ctx) => {
-    ctx.setState('busy')
+    ctx.player.setState('busy')
 
     await sleep(500)
     await ctx.basicReply(500,
@@ -103,12 +103,12 @@ module.exports = new Scene('cuartoInicial')
     await ctx.basicReply(2000,
       'Hay una libreta en blanco, pero no parece importante.')
 
-    ctx.removeState('busy')
+    ctx.player.removeState('busy')
   })
   .hears(/\bexamina\b.*\bropa\b/i, async (ctx) => {
-    ctx.setState('busy')
+    ctx.player.setState('busy')
 
-    if (ctx.has('llave_roja')) {
+    if (ctx.player.has('llave_roja')) {
       await sleep(500)
       await ctx.basicReply(500,
         'Pero si la revisé bien! :confused:')
@@ -122,7 +122,7 @@ module.exports = new Scene('cuartoInicial')
       await ctx.basicReply(2000,
         'La nota dice: El que lea esto es un huevo podrido')
 
-      ctx.removeState('busy')
+      ctx.player.removeState('busy')
       return
     }
     await sleep(500)
@@ -143,6 +143,6 @@ module.exports = new Scene('cuartoInicial')
         'Describe lo que ves a tu alrededor'
       ])
 
-    ctx.removeState('busy')
-    ctx.give('llave_roja')
+    ctx.player.removeState('busy')
+    ctx.player.give('llave_roja')
   })

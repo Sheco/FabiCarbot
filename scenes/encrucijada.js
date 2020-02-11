@@ -11,16 +11,16 @@ module.exports = new Scene('encrucijada')
       ])
   })
   .hears(/\bdescribe\b.*\balrededor\b/i, async (ctx) => {
-    ctx.setState('busy')
+    ctx.player.setState('busy')
 
     await ctx.basicReply(2000,
       'Es una rara habitación con forma de V')
-    if (!ctx.has('botellaPolvo')) {
+    if (!ctx.player.has('botellaPolvo')) {
       await ctx.basicReply(2000,
         'En el piso veo una *botella con un polvo blanco*, muy fino')
     }
 
-    if (ctx.is('lasersRevelados')) {
+    if (ctx.player.is('lasersRevelados')) {
       await sleep(500)
       await ctx.basicReply(3000,
         'Hay rayos laser invisibles en este pasillo, con el polvo los puedo ver')
@@ -40,24 +40,24 @@ module.exports = new Scene('encrucijada')
       [
         'Usa la puerta de la izquierda',
         'Usa la puerta roja',
-        ['Agarra la botella de polvo', !ctx.has('botellaPolvo')],
+        ['Agarra la botella de polvo', !ctx.player.has('botellaPolvo')],
         'Explora el extremo de la derecha'
       ])
 
-    ctx.removeState('busy')
+    ctx.player.removeState('busy')
   })
   .hears(/\busa\b.*\bpuerta\b.*\broja\b/i, async (ctx) => {
-    ctx.setState('busy')
+    ctx.player.setState('busy')
 
     await sleep(500)
     await ctx.basicReply(1000, 'voy')
 
-    ctx.removeState('busy')
+    ctx.player.removeState('busy')
     ctx.scene.enter('cuartoInicial')
   })
   .hears(/\bbotella\b/i, async (ctx) => {
-    ctx.setState('busy')
-    ctx.give('botellaPolvo')
+    ctx.player.setState('busy')
+    ctx.player.give('botellaPolvo')
 
     await sleep(500)
     await ctx.basicReply(2000,
@@ -68,15 +68,15 @@ module.exports = new Scene('encrucijada')
         'Usa el polvo!'
       ])
 
-    ctx.removeState('busy')
+    ctx.player.removeState('busy')
   })
   .hears(/\bpuerta\b.*\bizquierda\b/i, async (ctx) => {
-    ctx.setState('busy')
+    ctx.player.setState('busy')
 
     await sleep(500)
     await ctx.basicReply(500, 'Voy')
-    if (!ctx.is('lasersRevelados')) {
-      if (!ctx.is('lasersConocidos')) {
+    if (!ctx.player.is('lasersRevelados')) {
+      if (!ctx.player.is('lasersConocidos')) {
         await sleep(3000)
         await ctx.basicReply(2000,
           'No se que signifique el letrero que esta junto a la *puerta*')
@@ -89,8 +89,8 @@ module.exports = new Scene('encrucijada')
       await ctx.basicReply(2000,
         'No me pidas que lo vuelva a hacer porfa :confounded:')
 
-      ctx.setState('lasersConocidos')
-      ctx.removeState('busy')
+      ctx.player.setState('lasersConocidos')
+      ctx.player.removeState('busy')
       return
     }
     await sleep(500)
@@ -101,15 +101,15 @@ module.exports = new Scene('encrucijada')
     await ctx.basicReply(2000,
       'La puerta tiene un candado que necesita una *combinación*',
       [
-        ['Pon 0000', ctx.is('combinacionEncrucijada')],
+        ['Pon 0000', ctx.player.is('combinacionEncrucijada')],
         'Explora el extremo de la derecha',
         'Describe lo que hay a tu alrededor'
       ])
 
-    ctx.removeState('busy')
+    ctx.player.removeState('busy')
   })
   .hears(/\busa\b.*\bpolvo\b/i, async (ctx) => {
-    ctx.setState('busy')
+    ctx.player.setState('busy')
 
     await sleep(500)
     await ctx.basicReply(1000, 'Buena idea! soplare para crear una nube de *polvo* :dash:')
@@ -120,12 +120,12 @@ module.exports = new Scene('encrucijada')
       [
         'Describe lo que hay a tu alrededor'
       ])
-    ctx.setState('lasersRevelados')
+    ctx.player.setState('lasersRevelados')
 
-    ctx.removeState('busy')
+    ctx.player.removeState('busy')
   })
   .hears(/\bextremo\b.*\bderecha\b/i, async (ctx) => {
-    ctx.setState('busy')
+    ctx.player.setState('busy')
 
     await sleep(500)
     await ctx.basicReply(500, 'Voy')
@@ -138,10 +138,10 @@ module.exports = new Scene('encrucijada')
         'Describe lo que hay a tu alrededor'
       ])
 
-    ctx.removeState('busy')
+    ctx.player.removeState('busy')
   })
   .hears(/\blee\b.*\bnota\b/i, async (ctx) => {
-    ctx.setState('busy')
+    ctx.player.setState('busy')
 
     await sleep(500)
     await ctx.basicReply(500, 'Dice esto...')
@@ -149,20 +149,20 @@ module.exports = new Scene('encrucijada')
     await sleep(500)
     await ctx.basicReply(3000, '0 Leche\n0 Huevos\n0 Pistola NERF\n0 Dulces')
 
-    ctx.setState('combinacionEncrucijada')
+    ctx.player.setState('combinacionEncrucijada')
 
-    ctx.removeState('busy')
+    ctx.player.removeState('busy')
   })
   .hears(/\b0000\b/i, async (ctx) => {
-    if (!ctx.is('combinacionEncrucijada')) {
+    if (!ctx.player.is('combinacionEncrucijada')) {
       return
     }
-    ctx.setState('busy')
+    ctx.player.setState('busy')
 
     await sleep(500)
     await ctx.basicReply(2000,
       'Funcionó la *combinación*, gracias! he logrado salir!')
 
-    ctx.removeState('busy')
+    ctx.player.removeState('busy')
     ctx.scene.enter('muerte')
   })

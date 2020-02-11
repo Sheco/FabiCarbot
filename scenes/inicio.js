@@ -16,7 +16,7 @@ module.exports = new Scene('inicio')
       ['Si', 'No', '¿Quien eres?'])
   })
   .hears(/\bno\b/i, async (ctx) => {
-    ctx.setState('busy')
+    ctx.player.setState('busy')
 
     await sleep(500)
     await ctx.basicReply(1500,
@@ -24,10 +24,10 @@ module.exports = new Scene('inicio')
 
     await ctx.scene.enter('cuartoInicial')
 
-    ctx.removeState('busy')
+    ctx.player.removeState('busy')
   })
   .hears(/\b(si|ok|esta bien)\b/i, async (ctx) => {
-    ctx.setState('busy')
+    ctx.player.setState('busy')
 
     await sleep(500)
     await ctx.basicReply(1500,
@@ -38,10 +38,10 @@ module.exports = new Scene('inicio')
       'Aquí el gobierno tiene un aparato de control mental y no puedo pensar claramente, tienes que decirme que hacer para poder escapar.')
     await ctx.scene.enter('cuartoInicial')
 
-    ctx.removeState('busy')
+    ctx.player.removeState('busy')
   })
   .hears(/\bquien eres?\b/i, async (ctx) => {
-    ctx.setState('busy')
+    ctx.player.setState('busy')
 
     await sleep(500)
     await ctx.basicReply(2000,
@@ -55,5 +55,5 @@ module.exports = new Scene('inicio')
     await ctx.basicReply(2000,
       'Ayudame, por favor, si?')
 
-    ctx.removeState('busy')
+    ctx.player.removeState('busy')
   })
