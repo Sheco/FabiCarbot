@@ -3,6 +3,10 @@ const Markup = require('telegraf/markup')
 const emoji = require('node-emoji')
 const { sleep, conditionalList } = require('./helper')
 
+/*
+ * Contexto personalizado para agregar metodos de conveniencia
+ * para algunas tareas comúnes
+ */
 class CustomContext extends Context {
   is (state) {
     return this.session.state && this.session.state[state]

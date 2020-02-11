@@ -1,20 +1,19 @@
 const Telegraf = require('telegraf')
-const session = require('telegraf/session')
 const Stage = require('telegraf/stage')
 const Context = require('./context')
 const { basicReply } = require('./helper')
 require('dotenv').config()
 
-const bot = new Telegraf(process.env.BOT_TOKEN,
-  {
-    contextType: Context
-  })
-bot.use(session())
-
-const stage = new Stage()
 function scene (name) {
   return require('./scenes/' + name)
 }
+
+const bot = new Telegraf(process.env.BOT_TOKEN,
+  { contextType: Context })
+bot.use(Telegraf.session())
+
+/* Cargar las escenas en memoria */
+const stage = new Stage()
 stage.register(
   scene('inicio'),
   scene('muerte'),
@@ -24,6 +23,12 @@ stage.register(
 
 const stageMiddleware = stage.middleware()
 
+/*
+ * Middleware especial, si el bot esta ocupado respondiendo
+ * a este mismo usuario, ignorara cualquier otro mensaje que
+ * llegue, esto con la finalidad de evitar flood y responder
+ * varias veces cuando ya esta tratando de hacer algo el bot
+ */
 bot.use((ctx, next) => {
   if (ctx.is('busy')) {
     console.log('ignorando mensaje', ctx.update.message.text)
@@ -32,12 +37,19 @@ bot.use((ctx, next) => {
   return stageMiddleware(ctx, next)
 })
 
+/*
+ * Inicializar el juego!
+ */
 bot.command('start', (ctx) => {
   ctx.session.inventory = {}
   ctx.session.state = {}
   ctx.scene.enter('inicio')
 })
 
+/*
+ * Este es un comando de prueba, solo para depuración
+ * y pruebas, te lleva directo a cualquiera de las escenas
+ */
 bot.command('enter', (ctx) => {
   const args = ctx.update.message.text.split(' ')
   if (args.length === 1) {
@@ -52,6 +64,11 @@ bot.command('enter', (ctx) => {
   ctx.scene.enter(name)
 })
 
+/*
+ * En cualquier parte el bot puede oir la palabra
+ * inventario y respondera si tiene alguno de los
+ * objetos del juego
+ */
 bot.hears('inventario', async (ctx) => {
   if (!ctx.session.inventory) {
     return
@@ -65,6 +82,7 @@ bot.hears('inventario', async (ctx) => {
   }
 })
 
+/* Inicialización del bot */
 if (process.env.WEBHOOK_URL) {
   bot.launch({
     webhook: {

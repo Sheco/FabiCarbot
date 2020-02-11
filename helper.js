@@ -1,3 +1,7 @@
+/*
+ * Este archivo incluye algunas funciones que son
+ * utiles de vez en cuando
+ */
 
 exports.sleep = function (ms) {
   return new Promise((resolve) => {
