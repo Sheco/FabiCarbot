@@ -50,7 +50,7 @@ module.exports = new Scene('encrucijada')
     ctx.player.setState('busy')
 
     await sleep(500)
-    await ctx.basicReply(1000, 'voy')
+    await ctx.basicReply(1000, 'Regresaré al cuarto de donde vine')
 
     ctx.player.removeState('busy')
     ctx.scene.enter('cuartoInicial')
