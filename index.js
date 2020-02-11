@@ -93,7 +93,7 @@ bot.hears('inventario', async (ctx) => {
 })
 
 bot.on('message', (ctx) => {
-  if (!ctx.scene.current) {
+  if (!ctx.scene && ctx.scene.current) {
     ctx.player.reset()
     ctx.scene.enter('inicio')
   }
